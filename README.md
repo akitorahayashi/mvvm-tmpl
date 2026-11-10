@@ -27,6 +27,8 @@ Next, update the values in various configuration files to match your new project
 
 This is the source file for the Xcode project (`.xcodeproj`).
 
+`just gen-pj` runs XcodeGen directly against `project.yml`. XcodeGen expands `${TEAM_ID}` from the environment; an empty value supports unsigned builds and simulator tests. The generated `.xcodeproj` remains excluded from version control.
+
 | Setting Item | Current Value | Change Example (`NewApp`) | Details |
 |---|---|---|---|
 | `name` | `TemplateApp` | `NewApp` | Project name. Match it with the directory name. |
@@ -37,7 +39,7 @@ This is the source file for the Xcode project (`.xcodeproj`).
 | `targets.TemplateAppUITests.sources` | `[Tests/UI]` | `[Tests/UI]` | The source directory for UI tests. This path is generic and typically does not require changes. |
 | `schemes` | `TemplateApp`, `TemplateAppTests` ... | `NewApp`, `NewAppTests` ... | Change scheme names to match the new project name. |
 
-**Note:** After changing `project.yml`, be sure to run `just gen-pj` to regenerate the `.xcodeproj` file.
+`just gen-pj` regenerates the `.xcodeproj` after changes to `project.yml`.
 
 #### Info.plist Files
 
@@ -89,7 +91,7 @@ This project exposes a standardized set of recipes through `just`. These command
 
 ### Setup and Project Generation
 - `just setup` - Initialize project: install dependencies (Ruby, Mint) and generate Xcode project
-- `just gen-pj` - Generate Xcode project from `project.envsubst.yml`
+- `just gen-pj` - Generate Xcode project from `project.yml`
 
 ### Code Quality
 - `just check` - Verify code formatting and linting

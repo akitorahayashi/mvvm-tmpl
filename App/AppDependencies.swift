@@ -17,8 +17,8 @@ struct AppDependencies: Sendable {
       AppDependencies(countLogic: countLogic)
     }
 
-    // Move or define mock classes within the DI container file
-    // so that test targets can access `MockCountLogic`.
+    /// Move or define mock classes within the DI container file
+    /// so that test targets can access `MockCountLogic`.
     @MainActor
     final class MockCountLogic: CountLogicProtocol {
       var countToReturn: Int = 0

@@ -3,7 +3,6 @@ options:
   bundleIdPrefix: com.akitorahayashi
   createIntermediateGroups: true
   defaultConfig: Debug
-  teamId: ${TEAM_ID}
 
 settings:
   base:
@@ -11,7 +10,7 @@ settings:
     MARKETING_VERSION: 1.0
     CURRENT_PROJECT_VERSION: 1
     ENABLE_USER_SCRIPT_SANDBOXING: "NO"
-    DEVELOPMENT_TEAM: $TEAM_ID
+    DEVELOPMENT_TEAM: ${TEAM_ID}
     SKIP_MACRO_VALIDATION: "YES"
   configs:
     Debug:

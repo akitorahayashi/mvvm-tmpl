@@ -2,7 +2,7 @@
 # justfile for TemplateApp automation
 # ==============================================================================
 
-set dotenv-load := true
+set dotenv-load
 
 # --- PROJECT SETTINGS ---
 
@@ -60,9 +60,8 @@ setup:
 
 # Generate Xcode project
 gen-pj:
-    @echo "Generating Xcode project with TEAM_ID: {{ TEAM_ID }}"
-    @TEAM_ID={{ TEAM_ID }} envsubst < project.envsubst.yml > project.yml
-    @mint run xcodegen generate
+    @echo "Generating Xcode project..."
+    @TEAM_ID="{{ TEAM_ID }}" mint run xcodegen generate
 
 # Reset SwiftPM cache, dependencies, and build artifacts
 resolve-pkg:

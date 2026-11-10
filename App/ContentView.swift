@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
   @StateObject private var viewModel: ContentViewModel
 
-  // Accept AppDependencies in initializer
+  /// Accept AppDependencies in initializer
   init(dependencies: AppDependencies) {
     _viewModel = StateObject(
       wrappedValue: ContentViewModel(logic: dependencies.countLogic)

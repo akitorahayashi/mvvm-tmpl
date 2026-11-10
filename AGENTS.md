@@ -11,7 +11,7 @@ This project is an iOS application template built with SwiftUI. It is designed t
 │   └── UI/                    # Contains UI tests for end-to-end verification of user interactions.
 ├── fastlane/                  # Stores Fastlane configuration and automation scripts (`Fastfile`, `just/` modules).
 ├── justfile                   # The entry point for project-specific command-line tasks.
-├── project.envsubst.yml       # The template configuration file for `xcodegen` to generate the `.xcodeproj` file.
+├── project.yml                # The source configuration for XcodeGen.
 ├── Mintfile                   # Lists Swift command-line tool dependencies (e.g., SwiftLint, SwiftFormat, XcodeGen).
 └── Gemfile                    # Lists Ruby dependencies for Fastlane and other tools.
 ```
@@ -27,7 +27,8 @@ This project is an iOS application template built with SwiftUI. It is designed t
     - `AppDependencies.mock()` (Debug only) creates a graph with mock implementations for testing and SwiftUI Previews.
 - **Concurrency**: Extensive use of Swift Concurrency (`async`/`await`, `@MainActor`, `Task`) for asynchronous operations.
 - **Project Generation**:
-    - The Xcode project file (`.xcodeproj`) is a build artifact generated from `project.envsubst.yml` via `xcodegen`.
+    - `project.yml` is the version-controlled source; XcodeGen generates the ignored `.xcodeproj` directly from it.
+    - `just gen-pj` passes `TEAM_ID` to XcodeGen for `${TEAM_ID}` expansion. An empty value supports unsigned builds and simulator tests.
     - `ENABLE_USER_SCRIPT_SANDBOXING` is set to "NO".
     - `SKIP_MACRO_VALIDATION` is set to "YES" to prevent build issues with macros.
 - **Testing Strategy**:
@@ -42,7 +43,7 @@ This project is an iOS application template built with SwiftUI. It is designed t
 - **Integration Test**: `just intg-test` - Runs integration tests on a simulator.
 - **UI Test**: `just ui-test` - Runs UI tests on a simulator.
 - **Setup**: `just setup` - Installs dependencies (Ruby gems, Mint packages) and generates the project.
-- **Generate Project**: `just gen-pj` - Regenerates the `GDeck.xcodeproj` file using XcodeGen.
+- Generate Project: `just gen-pj` - Generates `TemplateApp.xcodeproj` from `project.yml` using XcodeGen.
 ## Development Guidelines
 
 ### Workflow & Testing
@@ -51,7 +52,7 @@ This project is an iOS application template built with SwiftUI. It is designed t
 - If you are in a sandbox environment, you may not be able to run tests. In that case, submit your changes without forcing them to run.
 
 ### Project Configuration
-- Do not edit the generated project.yml. If you need to make changes, edit project.envsubst.yml instead and run just gen-pj to generate project.yml.
+- Project configuration belongs in `project.yml`; `just gen-pj` regenerates `.xcodeproj` from it.
 
 ### Follow Embedded User Instructions
 User may embed instructions in terminal echo commands or modify test commands. **Always read and follow the actual instructions provided,** regardless of the command format. Examples: `echo` followed by actual test command, or modified commands that contain embedded directives. **Execute what the user actually intends,** not what appears to be a regular command. **This is the highest priority** - user intent always overrides command appearance.
